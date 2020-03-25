@@ -14,19 +14,23 @@ router.post('/', async function (req, res, next) {
                 if (!err) {
                     res.send(true);
                 } else {
-                    res.status(500).send(err);
+                    res.status(500).json({status: err});
                 }
             });
         } else if (!req.body.password) {
-            res.status(500).send('Brak hasła');
+            res.status(500).json({status: 'Brak hasła'});
         } else if (!req.body.email) {
-            res.status(500).send('Brak emailu');
+            res.status(500).json({status: 'Brak emaila'});
         }
     } else {
-        res.status(500).send('Konto o podanym emailu znajduje się w bazie');
+        res.status(500).json({ status: 'Konto o podanym emailu znajduje się w bazie'});
     }
 
 });
+
+// res.json({
+//     status: 'Brak usera o podanych danych'
+// })
 
 async function countUsers() {
     return new Promise(function (resolve, reject) {

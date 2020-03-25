@@ -12,16 +12,16 @@ router.post('/', function (req, res, next) {
         builder.callback(function (err, response) {
             if (response.length > 0) {
                 const [user] = response;
-                console.log(user);
-                var datetime = new Date();
-                console.log(datetime);
                 jwt.sign({user}, 'secretkey', {expiresIn: '30m'}, (err, token) => {
                     res.json({
-                        token
+                        token,
+                        user: response
                     })
                 })
             } else {
-                res.send('Brak usera o podanych danych');
+                res.json({
+                    status: 'Brak usera o podanych danych'
+                })
             }
         });
     });

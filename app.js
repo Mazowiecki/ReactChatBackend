@@ -32,12 +32,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(process.env.PORT || 5000, () => console.log(`Example app listening on port ${5000}!`));
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+})
+
 app.use('/', indexRouter);
 app.use('/getUser', getUserRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/createPost', createPostRouter);
 app.use('/getPosts', getPostsRouter);
+
 
 
 // catch 404 and forward to error handler
@@ -55,5 +63,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;
