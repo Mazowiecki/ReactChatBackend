@@ -15,7 +15,7 @@ router.post('/', function (req, res, next) {
                 console.log(user);
                 var datetime = new Date();
                 console.log(datetime);
-                jwt.sign({user}, 'secretkey', (err, token) => {
+                jwt.sign({user}, 'secretkey', {expiresIn: '30m'}, (err, token) => {
                     res.json({
                         token
                     })

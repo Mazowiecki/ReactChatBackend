@@ -6,9 +6,11 @@ var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var getUserRouter = require('./routes/getUser');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
+var createPostRouter = require('./routes/createPost');
+var getPostsRouter = require('./routes/getPosts');
 
 var app = express();
 
@@ -31,9 +33,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(process.env.PORT || 5000, () => console.log(`Example app listening on port ${5000}!`));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/getUser', getUserRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/createPost', createPostRouter);
+app.use('/getPosts', getPostsRouter);
 
 
 // catch 404 and forward to error handler
