@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var DB = require('nosql');
 var nosql = DB.load('./databases/users');
+var jwt = require('jsonwebtoken');
 
 /* GET home page. */
 router.post('/', function (req, res, next) {
@@ -10,7 +11,15 @@ router.post('/', function (req, res, next) {
         builder.where('password', req.body.password);
         builder.callback(function (err, response) {
             if (response.length > 0) {
-                res.send(true);
+                const [user] = response;
+                console.log(user);
+                var datetime = new Date();
+                console.log(datetime);
+                jwt.sign({user}, 'secretkey', (err, token) => {
+                    res.json({
+                        token
+                    })
+                })
             } else {
                 res.send('Brak usera o podanych danych');
             }
