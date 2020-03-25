@@ -22,7 +22,6 @@ router.post('/', verifyToken, async function (req, res, next) {
                     if (!err) {
                         res.json({
                             message: 'Post created',
-                            authData
                         });
                     } else {
                         res.status(500).send(err);
