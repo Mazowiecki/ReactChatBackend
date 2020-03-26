@@ -11,6 +11,7 @@ var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var createPostRouter = require('./routes/createPost');
 var getPostsRouter = require('./routes/getPosts');
+var isAuthenticatedRouter = require('./routes/isAuthenticated');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/createPost', createPostRouter);
 app.use('/getPosts', getPostsRouter);
+app.use('/isAuthenticated', isAuthenticatedRouter);
 
 
 

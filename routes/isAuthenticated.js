@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var DB = require('nosql');
-var nosql = DB.load('./databases/posts');
 var jwt = require('jsonwebtoken');
 
 /* GET home page. */
@@ -10,14 +8,9 @@ router.get('/', verifyToken, function (req, res, next) {
         if (err) {
             res.sendStatus(403);
         } else {
-            nosql.find().make(function (builder) {
-                builder.callback(function (err, response) {
-                    res.json({
-                        response,
-                        authData
-                    })
-                });
-            });
+            res.json({
+                authData
+            })
         }
     });
 });
